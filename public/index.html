@@ -9,7 +9,19 @@
 <body>
 
   <div id="app">
+    <ul id="currency-list">
+        <li v-for="(rate, currency) in currencies.rates">
+            Currency: {{ currency }} Rate: {{ rate.toFixed(2) }} 
+        </li>
+      </ul>
 
+
+      <label for="currency_select">Select a Currency:</label>
+      <select id="currency_select" v-model="selectedCurrencyRate">
+        <option disabled value="">Select a currency</option>
+        <option v-for="(rate, currency) in currencies.rates" :value="rate">{{ currency }}</option>
+    </select>
+        <p>{{ showSelectedExchangeRate }}</p>
   </div>
 
 </body>

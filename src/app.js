@@ -3,13 +3,23 @@ import Vue from 'vue';
 document.addEventListener('DOMContentLoaded', () => {
   new Vue({
     el: '#app',
-    data: {},
+    data: {
+        currencies: {},
+        selectedCurrencyRate: null
+    },
 
     computed: {},
 
-    mounted() {},
+    mounted() {
+        this.getCurrencies();
+    },
 
-    methods: {}
-    
+    methods: {
+        getCurrencies: function() {
+            fetch("https://api.exchangeratesapi.io/latest")
+            .then(response => response.json())
+            .then(currencies => this.currencies = currencies)
+        }, 
+    }
   })
 })
