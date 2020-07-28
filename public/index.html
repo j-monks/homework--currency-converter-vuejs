@@ -7,21 +7,48 @@
   <script type="text/javascript" src="./js/bundle.js"></script>
 </head>
 <body>
-
+  <h1>EXCHANGE RATES</h1>  
   <div id="app">
     <ul id="currency-list">
         <li v-for="(rate, currency) in currencies.rates">
             Currency: {{ currency }} Rate: {{ rate.toFixed(2) }} 
         </li>
-      </ul>
-
-
-      <label for="currency_select">Select a Currency:</label>
-      <select id="currency_select" v-model="selectedCurrencyRate">
+    </ul>
+    <h3>EURO TO DESIRED CURRENCY</h3> 
+    <form v-on:submit.prevent="convertEuroToSelectedCurrency">
+        <label>Please Enter Euro Amount</label>
+        <hr> 
+        <input type="number" id="euro-input" v-model.number="euroInput">
+        <input type="submit" value="Convert">
+    </form>
+    <hr>
+    <label for="currency_select">Please Select a Conversion Currency</label> 
+    <hr> 
+    <label>{{ selectedCurrencyRate }}</label>
+    <select id="currency_select" v-model="selectedCurrencyRate">
         <option disabled value="">Select a currency</option>
         <option v-for="(rate, currency) in currencies.rates" :value="rate">{{ currency }}</option>
     </select>
-        <p>{{ showSelectedExchangeRate }}</p>
+   
+    <p>{{ euroToSelectedConversion }}</p>
+
+    <h3>DESIRED CURRENCY TO EURO</h3> 
+    <form v-on:submit.prevent="convertSelectedCurrencyToSelectedEuro">
+        <label>Please Enter Amount</label>
+        <hr> 
+        <input type="number" id="euro-input" v-model.number="desiredInput">
+        <input type="submit" value="Convert">
+    </form>
+    <hr>
+    <label for="currency_select">Please Select a Currency</label> 
+    <hr> 
+    <label>{{ selectedCurrencyRate }}</label>
+    <select id="currency_select" v-model="selectedCurrencyRateC2E">
+        <option disabled value="">Select a currency</option>
+        <option v-for="(rate, currency) in currencies.rates" :value="rate">{{ currency }}</option>
+        <p>hello</p>
+    </select>
+    <p>€{{ selectedToEuroConversion }}</p>
   </div>
 
 </body>
